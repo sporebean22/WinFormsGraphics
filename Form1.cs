@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
@@ -19,23 +20,18 @@ namespace WindowsFormsApp1
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             var Objects = InitialiseGraphicsObjects(Color.Red);
-            //var rectangle = Square(Objects.Item1, Objects.Item3, 15, 24);
-            //Thread.Sleep(5000);
-            //RemoveSquare(rectangle);
             //AnimatedSquare(Objects.Item1, Objects.Item3);
+            //var rectangle = Square(Objects.Item1, Objects.Item3, 15, 24);
             DrawTriangle(Objects.Item1, Objects.Item3, Objects.Item2, 22);
         }
 
         private (Graphics, Pen, Brush) InitialiseGraphicsObjects(Color color)
         {
             Graphics graphicsObject = this.CreateGraphics();
-
             Pen myPen = new Pen(color, 5);
-
             var brush = new SolidBrush(color);
-
             var tuple = (graphicsObject, myPen, brush);
-
+            //dont use tuples!!! - make an object instead
             return tuple;
         }
 
@@ -59,26 +55,12 @@ namespace WindowsFormsApp1
 
         private void AnimatedSquare(Graphics graphics, Brush brush)
         {
-            //var callback = new TimerCallback();
-
-            //Timer timer = new Timer();
-
-            //bool IsColourIndexOutOfBounds = false;
-
-            for (int Xaxis = 0, Yaxis = 0/*, colourIndex = 0*/; Xaxis + Yaxis < 10000/* && IsColourIndexOutOfBounds != false */; Xaxis += 51/*, colourIndex++*/)
+            for (int Xaxis = 0, Yaxis = 0; Xaxis + Yaxis < 10000; Xaxis += 51)
             {
-                /*if (colourIndex > 5)
-                {
-                    IsColourIndexOutOfBounds = true;
-                    colourIndex = 0;
-                }*/
-                
                 var rectangle = Square(graphics, brush, Xaxis, Yaxis);
                 Thread.Sleep(450);
                 //RemoveSquare(rectangle);
             }
-
-            //timer.Dispose();
         }
 
         public void DrawTriangle(Graphics graphicsObject, Brush brush, Pen pen, int multiplyer)
@@ -97,8 +79,6 @@ namespace WindowsFormsApp1
                 types[typeIndex].Y *= multiplier;
             }
             return types;
-
         }
-
     }
 }
